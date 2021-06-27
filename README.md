@@ -12,16 +12,35 @@ Repository for OCP operations
 https://docs.openshift.com/container-platform/4.6/applications/projects/configuring-project-creation.html#disabling-project-self-provisioning_configuring-project-creation
 
 
-### Playbook for creating a project with the following objects included:
-- Default node-selector
+### Playbook createproj.yaml ###
+- Create ClusterResourceQuota
+- Create Projects
 - Limit Ranges
-
-
-## Cluster Resource Quota ##
-Template for creating CRQ
+- Add admin role to group on created projects
 
 
 ## Role for CRQ management ##
-A role that you can give to a user so they can do the following:
-- View their CRQ
-- Edit the RQ on all projects they have admin rights on
+
+ocproles/resourcequota.yaml
+
+- gives the user or group when assigned the ability to create, edit and delete resource quotas on the assigned project
+
+### give permission to user ###
+oc adm policy add-role-to-user managerq {username} -n {project}
+
+### give permission to group ###
+oc adm policy add-role-to-group managerq {groupname} -n {project}
+
+
+
+ocproles/clusterresourcerole.yaml
+
+- Allow user or group to view the clusterresourcequotas
+
+### give permission to user ###
+oc adm policy add-cluster-role-to-user managerq {username}
+
+### give permission to group ###
+oc adm policy add-cluster-role-to-group managerq {groupname}
+
+

@@ -1,0 +1,16 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: managerq
+rules:
+- apiGroups:
+  - ""
+  - quota.openshift.io
+  resources:
+  - resourcequotas
+  verbs:
+  - list
+  - get
+  - edit
+  - create
+  - delete

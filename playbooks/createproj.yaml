@@ -37,4 +37,10 @@
       with_items:
       - "{{ projects }}"
       register: lrresponse
-      changed_when: "'unchanged' not in lrresponse.stdout" 
+      changed_when: "'unchanged' not in lrresponse.stdout"
+
+    - name: Add project admin to group for projects
+      shell: oc --kubeconfig={{kubeconfig}} adm policy add-role-to-group admin {{group}} -n {{item}}
+      with_items:
+      - "{{ projects }}"
+      register: groupresponse
