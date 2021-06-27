@@ -1,0 +1,40 @@
+  - name: Create Project
+    hosts: localhost
+    gather_facts: false
+
+    tasks:
+
+    - name: create resource quota
+      shell:  oc --kubeconfig={{kubeconfig}} create clusterresourcequota crq-{{group}} --project-label-selector=crq=crq-{{group}} --hard=cpu={{cpu}} --hard=memory={{memory}}
+      register: crqresponse
+      changed_when: "'created' in crqresponse.stdout"
+      failed_when: 
+      - "'AlreadyExists' not in crqresponse.stderr"
+      - "'created' not in crqresponse.stdout"
+
+    - name: create projects
+      shell: oc --kubeconfig={{kubeconfig}} new-project {{item}}
+      with_items:
+      - "{{ projects }}"
+      register: createresponse
+      changed_when: "'using' in createresponse.stdout"
+      failed_when: 
+      - "'AlreadyExists' not in createresponse.stderr"
+      - "'using' not in createresponse.stdout"
+
+    - name: Label project for crq
+      shell: oc --kubeconfig={{kubeconfig}} label namespace {{item}} crq=crq-{{group}}
+      with_items:
+      - "{{ projects }}"
+      register: crqresponse
+      changed_when: "'labeled' in crqresponse.stdout"
+      failed_when: 
+      - "'already' not in crqresponse.stderr"
+      - "'labeled' not in crqresponse.stdout"
+
+    - name: Add limit ranges to project
+      shell: oc --kubeconfig={{kubeconfig}} apply -f ../templates/limitranges.yaml -n {{item}}
+      with_items:
+      - "{{ projects }}"
+      register: lrresponse
+      changed_when: "'unchanged' not in lrresponse.stdout" 

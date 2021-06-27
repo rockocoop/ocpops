@@ -1,0 +1,9 @@
+[all:vars]
+kubeconfig=/home/grakover/openshift/468/joker/auth/kubeconfig
+group=devteam1
+cpu=30
+memory=200Gi
+#crqephemeral=100Gi
+
+
+projects=["devteam1-sandbox1","devteam1-sandbox2","devteam1-sandbox3"]
