@@ -30,6 +30,11 @@ ocproles/resourcequota.yaml
 
 - gives the user or group when assigned the ability to create, edit and delete resource quotas on the assigned project
 
+### add to cluster ###
+```
+oc apply -f ocproles/resourcequota.yaml
+```
+
 ### give permission to user ###
 ```
 oc adm policy add-role-to-user managerq {username} -n {project}
@@ -44,6 +49,11 @@ oc adm policy add-role-to-group managerq {groupname} -n {project}
 ocproles/clusterresourcerole.yaml
 
 - Allow user or group to view the clusterresourcequotas
+
+### add to cluster ###
+```
+oc apply -f ocproles/clusterresourcequota.yaml
+```
 
 ### give permission to user ###
 ```
