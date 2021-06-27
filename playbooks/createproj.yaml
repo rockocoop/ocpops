@@ -5,7 +5,7 @@
     tasks:
 
     - name: create resource quota
-      shell:  oc --kubeconfig={{kubeconfig}} create clusterresourcequota crq-{{group}} --project-label-selector=crq=crq-{{group}} --hard=cpu={{cpu}} --hard=memory={{memory}}
+      shell:  oc --kubeconfig={{kubeconfig}} create clusterresourcequota crq-{{group}} --project-label-selector=crq=crq-{{group}} --hard=cpu={{cpu}} --hard=memory={{memory}} --hard=ephemeral-storage={{ephemeral}}
       register: crqresponse
       changed_when: "'created' in crqresponse.stdout"
       failed_when: 

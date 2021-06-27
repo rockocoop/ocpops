@@ -7,7 +7,7 @@ group=devteam1
 ##Cluster Resource Quota Limits
 cpu=30
 memory=200Gi
-#crqephemeral=100Gi
+ephemeral=500Gi
 
 ## List of projects ##
 projects=["devteam1-sandbox1","devteam1-sandbox2","devteam1-sandbox3"]
