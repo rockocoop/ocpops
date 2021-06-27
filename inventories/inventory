@@ -1,9 +1,13 @@
 [all:vars]
+## location of kubeconfig file
 kubeconfig=/home/grakover/openshift/468/joker/auth/kubeconfig
+
+## Group name as in LDAP ##
 group=devteam1
+##Cluster Resource Quota Limits
 cpu=30
 memory=200Gi
 #crqephemeral=100Gi
 
-
+## List of projects ##
 projects=["devteam1-sandbox1","devteam1-sandbox2","devteam1-sandbox3"]
