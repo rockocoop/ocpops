@@ -1,0 +1,16 @@
+  - name: Create SCC for UID
+    hosts: localhost
+    gather_facts: false
+
+    tasks:
+
+    - name: create scc yaml for uid {{uid}}
+      template:
+        src: ../templates/sccID.yaml
+        dest: ../templates/scc{{uid}}.yaml
+
+    - name: create scc for uid {{uid}}
+      shell:  oc --kubeconfig={{kubeconfig}} apply -f ../templates/scc{{uid}}.yaml 
+      register: sccresponse
+      changed_when: "'created' in sccresponse.stdout or 'unchanged' not in sccresponse.stdout"
+
