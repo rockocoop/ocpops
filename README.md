@@ -65,3 +65,13 @@ oc adm policy add-cluster-role-to-user managerq {username}
 oc adm policy add-cluster-role-to-group managerq {groupname}
 ```
 
+## Playbook sccID.yaml ##
+- Creates restricted SCC that allows for a specified UID 
+
+Update inventory file and then run from bastion:
+
+```
+ansible-playbook -i ../inventories/inventory sccID.yaml
+```
+
+

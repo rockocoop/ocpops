@@ -11,3 +11,6 @@ ephemeral=500Gi
 
 ## List of projects ##
 projects=["devteam1-sandbox1","devteam1-sandbox2","devteam1-sandbox3"]
+
+## for scc ##
+uid=999
