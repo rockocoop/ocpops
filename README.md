@@ -26,41 +26,41 @@ ansible-playbook -i ../inventories/inventory createproj.yaml
 
 ## Role for CRQ management ##
 
-ocproles/resourcequota.yaml
+### ocproles/resourcequota.yaml ###
 
 - gives the user or group when assigned the ability to create, edit and delete resource quotas on the assigned project
 
-### add to cluster ###
+#### add to cluster ####
 ```
 oc apply -f ocproles/resourcequota.yaml
 ```
 
-### give permission to user ###
+#### give permission to user ####
 ```
 oc adm policy add-role-to-user managerq {username} -n {project}
 ```
 
-### give permission to group ###
+#### give permission to group ####
 ```
 oc adm policy add-role-to-group managerq {groupname} -n {project}
 ```
 
 
-ocproles/clusterresourcerole.yaml
+### ocproles/clusterresourcerole.yaml ###
 
 - Allow user or group to view the clusterresourcequotas
 
-### add to cluster ###
+#### add to cluster ####
 ```
 oc apply -f ocproles/clusterresourcequota.yaml
 ```
 
-### give permission to user ###
+#### give permission to user ####
 ```
 oc adm policy add-cluster-role-to-user managerq {username}
 ```
 
-### give permission to group ###
+#### give permission to group ####
 ```
 oc adm policy add-cluster-role-to-group managerq {groupname}
 ```
